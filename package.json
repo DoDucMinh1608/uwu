@@ -5,13 +5,13 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "run-scss": "sass ",
+    "run-scss": "sass --watch --poll --no-source-map --charset src/scss:src/public/css",
     "run-start": "nodemon index.js",
     "dev": "concurrently npm:run-*"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "",
   "devDependencies": {
     "concurrently": "^7.4.0",
     "nodemon": "^2.0.19"
