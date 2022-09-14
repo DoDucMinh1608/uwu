@@ -4,7 +4,7 @@ import { fileURLToPath } from 'url'
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-function addFile(path, data) {
+function addFile(path, data = '') {
   if (!fs.existsSync(path)) return fs.appendFileSync(path, data)
   fs.writeFileSync(path, data, { encoding: 'utf-8' })
 }
@@ -24,6 +24,7 @@ const scssData = `body {
 }`
 const ejsData = dir => `<%- contentFor('title') %>
 ${dir.toUpperCase()}
+
 <%- contentFor('init') %>
 <link rel="stylesheet" href=".././../css/stylesheets/${dir}/style.css">
 <script src=".././../js/${dir}/index.js" type="module" defer></script>
@@ -59,3 +60,4 @@ function createFile(dir) {
     }
   }
 }
+createFile('uwuwuw')
