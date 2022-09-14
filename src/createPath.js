@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url'
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 function addFile(path, data) {
-  if (!fs.existsSync(path)) return fs.appendFile(path, data)
+  if (!fs.existsSync(path)) return fs.appendFileSync(path, data)
   fs.writeFileSync(path, data, { encoding: 'utf-8' })
 }
 const controllerData = dir => `import { Router } from 'express'
@@ -59,5 +59,3 @@ function createFile(dir) {
     }
   }
 }
-
-createFile('account')
