@@ -1,5 +1,5 @@
 import { app, io, listen } from './src/app.js'
-import index from './src/controllers/index.js'
+import index from './src/routes/index.js'
 
 app.use('/', index)
 io.on('connection', () => {

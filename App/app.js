@@ -13,7 +13,7 @@ app.use(express.json())
 app.use(expressEjsLayouts)
 
 app.set("view engine", "ejs");
-app.set("views", path.join('src', "views"));
+app.set("views", "views");
 app.set('layout', path.join('layouts', 'layout'))
 
 const httpServer = createServer(app)
