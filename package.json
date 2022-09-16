@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "run-scss": "sass --watch --poll --no-source-map --charset src/scss:src/public/css",
     "run-start": "nodemon index.js",
