@@ -3,7 +3,7 @@ const { join, sep, dirname } = require('path')
 const _ = undefined
 class File {
   // relative path
-  constructor(path) {
+  constructor(path = '../src') {
     this.path = join(__dirname, path) // project absolute dir
     this.projectDir = this.path.split(sep).at(-1)
   }
@@ -24,13 +24,13 @@ class File {
   }
 }
 class RouteTemplate extends File {
-  constructor(path, { sta = 'public', scss = 'scss', views = 'views', database = 'database', route = 'routes' }) {
+  constructor(path, options = { static: 'public', scss: 'scss', views: 'views', database: 'database', route: 'routes' }) {
     super(path)
-    this.static = sta
-    this.route = route
-    this.scss = scss
-    this.views = views
-    this.databse = database
+    this.static = options.static
+    this.route = options.route
+    this.scss = options.scss
+    this.views = options.views
+    this.databse = options.database
   }
   ejsTemplate = readFileSync(join(__dirname, 'static_file', 'layout.ejs'))
   expressApp = readFileSync(join(__dirname, 'static_file', 'expressApp.js'))
@@ -60,10 +60,10 @@ ${(route || path).toUpperCase()}
   }
   _createRouteSection(path, route = '') {
     return `router.route('/${route}').get((req, res) => {
-  res.render('pages/${path}/${this.jsNamespace(route)}')\n})\n`
+  res.render('pages/${this.jsNamespace(path)}/${this.jsNamespace(route)}')\n})\n`
   }
   _writeClientJS(route) {
-    return `console.log('${route.toUpperCase()}')`
+    return `console.log('${this.jsNamespace(route).toUpperCase()}')`
   }
   _createPathSection(route = '') {
     return `app.use('/${route == 'index' ? '' : route}', require('./${this.projectDir}/${this.route}/${this.jsNamespace(route)}'))\n`
@@ -76,71 +76,65 @@ const { app, listen } = require('./${this.projectDir}/app')\n\n` +
       `app.use(express.static(path.join('${this.projectDir}', '${this.static}')))
 
 app.set("views", path.join(__dirname, '${this.projectDir}', '${this.views}'))\n` +
-      routes.reduce((main, route) => main + this._createPathSection(route), '') + `\nlisten()`)
+      routes.reduce((main, route) => main + this._createPathSection(route), '') +
+      `\nlisten()`)
   }
 }
 class FolderTemplate extends RouteTemplate {
-  constructor(path, { sta = 'public', scss = 'scss', views = 'views', database = 'database', route = 'routes' }) {
-    super(path, { sta, scss, views, database, route })
+  constructor(path, options = { static: 'public', scss: 'scss', views: 'views', database: 'database', route: 'routes' }) {
+    super(path, options)
   }
-  _createScssDir() {
+  _createMainDir() {
+    this._makeDir()
     this._makeDir(join(this.scss, 'stylesheets'))
     this._makeFile(join(this.scss, 'reset.scss'), this.resetScss)
-  }
-  _createStaticDir() {
+
     this._makeDir(join(this.static, 'imgs'))
     this._makeDir(join(this.static, 'js'))
-  }
-  _createRoutesDir() {
+
     this._makeDir(this.route)
-  }
-  _createDatabaseDir() {
     this._makeDir(this.databse)
-  }
-  _createViewsDir() {
+
     this._makeFile(join(this.views, 'layouts', 'layout.ejs'), this.ejsTemplate)
     this._makeDir(join(this.views, 'partials'))
     this._makeDir(join(this.views, 'pages'))
   }
   createProject() {
-    this._makeDir()
+    const paths = Object.keys(this.paths)
+
+    this._createMainDir()
     this._makeFile('app.js', this.expressApp)
-    this._makeFile('../index.js', this._writeMainApp(...Object.keys(this.paths)), true)
+    this._makeFile('../index.js', this._writeMainApp(...paths.filter(i => !this.paths[i].options.subDir)), true)
 
-    Object.keys(this.paths).forEach(i => this._makeFile(join(this.route, i + '.js'), this._writeRoute(i, ...this.paths[i])))
+    for (const [path, { routes }] of Object.entries(this.paths)) {
+      const js = this.jsNamespace(path)
 
-    this._createScssDir()
-    this._createViewsDir()
-    this._createRoutesDir()
-    this._createStaticDir()
-    this._createDatabaseDir()
-
-    for (const [path, routes] of Object.entries(this.paths)) {
       this._generateRoute(path)
-      routes.forEach(route => this._generateRoute(path, route))
+
+      this._makeFile(join(this.route, js + '.js'), this._writeRoute(path, ...this.paths[path].routes))
+      routes.forEach(route => this._generateRoute(js, route)
+      )
     }
   }
   paths = {};
-  addRoute(path = '', ...routes) {
-    this.paths[this.jsNamespace(path)] ??= []
-    this.paths[this.jsNamespace(path)].push(...routes)
+  addRoute(path = '', routes = [], options = { subDir: false }) {
+    this.paths[path] ??= { routes: new Set(routes), options }
+    routes.forEach(i => this.paths[path].routes.add(i))
   }
   _generateRoute(path = '', route = '') {
     // this._makeFile(join(this.route, route + '.js'), this._routeFile(path, ...this.paths[path]))
-    const js = this.jsNamespace(route)
-    this._makeFile(join(this.views, 'pages', path, js + '.ejs'), this._writeEjs(path, route))
+    const js = this.jsNamespace(path)
+    this._makeFile(join(this.views, 'pages', js, this.jsNamespace(route) + '.ejs'), this._writeEjs(path, route))
 
-    this._makeFile(join(this.scss, 'stylesheets', path, this.cssNamespace(route) + '.scss'))
-    this._makeFile(join(this.scss, 'stylesheets', path, '_var.scss'))
+    this._makeFile(join(this.scss, 'stylesheets', js, this.cssNamespace(route) + '.scss'))
+    this._makeFile(join(this.scss, 'stylesheets', js, '_var.scss'))
 
-    this._makeFile(join(this.static, 'js', path, js + '.js'), this._writeClientJS(route))
-    this._makeFile(join(this.views, 'pages', path, js + '.ejs'), this._writeEjs(path, route))
+    this._makeFile(join(this.static, 'js', js, this.jsNamespace(route) + '.js'), this._writeClientJS(route))
   }
 }
-const a = new FolderTemplate('../src', {})
+const a = new FolderTemplate()
 
-a.addRoute(_, 'a', 'b', 'c')
-a.addRoute('asdf', 'asdf', 'b', 'c')
-a.addRoute('_ee', 'a', 'b', 'c')
-a.addRoute('asfaf', 'a', 'b', 'c')
+a.addRoute(_, ['b', 'c'])
+a.addRoute('account', ['login', 'register'], { subDir: true })
+// console.log(a.paths)
 a.createProject()
