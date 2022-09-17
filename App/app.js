@@ -100,26 +100,26 @@ class FolderTemplate extends RouteTemplate {
     this._makeDir(join(this.views, 'pages'))
   }
   createProject() {
-    const paths = Object.keys(this.paths)
+    const paths = Object.keys(this.#paths)
 
     this._createMainDir()
     this._makeFile('app.js', this.expressApp)
-    this._makeFile('../index.js', this._writeMainApp(...paths.filter(i => !this.paths[i].options.subDir)), true)
+    this._makeFile('../index.js', this._writeMainApp(...paths.filter(i => !this.#paths[i].options.subDir)), true)
 
-    for (const [path, { routes }] of Object.entries(this.paths)) {
+    for (const [path, { routes }] of Object.entries(this.#paths)) {
       const js = this.jsNamespace(path)
 
       this._generateRoute(path)
 
-      this._makeFile(join(this.route, js + '.js'), this._writeRoute(path, ...this.paths[path].routes))
+      this._makeFile(join(this.route, js + '.js'), this._writeRoute(path, ...this.#paths[path].routes))
       routes.forEach(route => this._generateRoute(js, route)
       )
     }
   }
-  paths = {};
+  #paths = {};
   addRoute(path = '', routes = [], options = { subDir: false }) {
-    this.paths[path] ??= { routes: new Set(routes), options }
-    routes.forEach(i => this.paths[path].routes.add(i))
+    this.#paths[path] ??= { routes: new Set(routes), options }
+    routes.forEach(i => this.#paths[path].routes.add(i))
   }
   _generateRoute(path = '', route = '') {
     // this._makeFile(join(this.route, route + '.js'), this._routeFile(path, ...this.paths[path]))
@@ -135,6 +135,6 @@ class FolderTemplate extends RouteTemplate {
 const a = new FolderTemplate()
 
 a.addRoute(_, ['b', 'c'])
-a.addRoute('account', ['login', 'register'], { subDir: true })
-// console.log(a.paths)
+a.addRoute('account', ['register'], { subDir: true })
+a.addRoute('chat', ['app'])
 a.createProject()
