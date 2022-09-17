@@ -7,13 +7,11 @@ const { createServer } = require('http')
 
 const app = express()
 
-app.use(express.static(path.join('src', 'public')))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(expressEjsLayouts)
 
 app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, 'views'));
 app.set('layout', path.join('layouts', 'layout'))
 
 const httpServer = createServer(app)
