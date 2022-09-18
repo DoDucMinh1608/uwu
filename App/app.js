@@ -75,9 +75,9 @@ const path = require('path')
 const { app, listen } = require('./${this.projectDir}/app')\n\n` +
       `app.use(express.static(path.join('${this.projectDir}', '${this.static}')))
 
-app.set("views", path.join(__dirname, '${this.projectDir}', '${this.views}'))\n` +
+app.set("views", path.join(__dirname, '${this.projectDir}', '${this.views}'))\n\n` +
       routes.reduce((main, route) => main + this._createPathSection(route), '') +
-      `\nlisten()`)
+      `\n\nlisten()`)
   }
 }
 class FolderTemplate extends RouteTemplate {
