@@ -1,1 +1,7 @@
 @import "../../node_modules/scss-reset/reset";
+
+body {
+  background-color: black;
+  color: white;
+  display: flex;
+}

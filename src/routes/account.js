@@ -9,6 +9,8 @@ router.route('/register').get((req, res) => {
 })
 router.route('/login').get((req, res) => {
   res.render('pages/account/login')
+}).post((req, res) => {
+  console.log(req.body)
 })
 
 module.exports = router
