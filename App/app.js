@@ -134,7 +134,6 @@ class FolderTemplate extends RouteTemplate {
 }
 const a = new FolderTemplate()
 
-a.addRoute(_, ['b', 'c'])
-a.addRoute('account', ['register'], { subDir: true })
-a.addRoute('chat', ['app'])
+a.addRoute(_)
+a.addRoute('account', ['register', 'login'], { subDir: true })
 a.createProject()
