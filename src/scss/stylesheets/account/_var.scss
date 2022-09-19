@@ -1,0 +1,10 @@
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.error-message {
+  text-align: left;
+  color: red;
+  font-size: .8rem;
+}

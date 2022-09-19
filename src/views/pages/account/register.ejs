@@ -5,11 +5,17 @@ REGISTER
 <link rel="stylesheet" href=".././../css/stylesheets/account/register.css">
 <script src=".././../js/account/register.js" type="module" defer></script>
 
+<% const account =  JSON.parse(locals.account) %>
+<% const data = JSON.parse(locals.data) %>
+
 <%- contentFor('body') %>
 <main>
   <h1>REGISTER</h1>
   <form action="./register" method="post" class="login-field">
-    <%- include('../../partials/registerFile') %>
+    <%- include('../../partials/registerFile', {account, data}) %>
+    <% if (locals.error) { %>
+    <span class="error-message">Try again</span>
+    <% } %>
     <section class="input-field">
       <input type="submit" value="Register">
     </section>
