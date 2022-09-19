@@ -5,8 +5,8 @@ REGISTER
 <link rel="stylesheet" href=".././../css/stylesheets/account/register.css">
 <script src=".././../js/account/register.js" type="module" defer></script>
 
-<% const account =  JSON.parse(locals.account) %>
-<% const data = JSON.parse(locals.data) %>
+<% const account = JSON.parse(locals.account || '{}') %>
+<% const data = JSON.parse(locals.data || '{}') %>
 
 <%- contentFor('body') %>
 <main>

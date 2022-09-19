@@ -1,4 +1,5 @@
 const { Router } = require('express')
+const queryString = require('querystring')
 const Account = require('../database/account')
 const router = Router()
 const accountSche = Account.schema.obj
@@ -35,7 +36,7 @@ router.route('/login').get((req, res) => {
     account: JSON.stringify(Account.schema.obj)
   })
 }).post((req, res) => {
-  console.log(req.body)
+  res.send(req.body)
 })
 
 module.exports = router
