@@ -29,12 +29,10 @@ router.route('/register').get((req, res) => {
       data: JSON.stringify(req.body)
     })
   }
-  res.redirect('/account/login')
+  res.render('pages/account/login', { account: JSON.stringify(Account.schema.obj) })
 })
 router.route('/login').get((req, res) => {
-  res.render('pages/account/login', {
-    account: JSON.stringify(Account.schema.obj)
-  })
+  res.render('pages/account/login', { account: JSON.stringify(Account.schema.obj), register: req.query.register })
 }).post((req, res) => {
   res.send(req.body)
 })

@@ -1,5 +1,26 @@
 @use './var';
 
+.pop-up-account {
+  position: absolute;
+  left: 50%;
+  translate: -50%;
+  top: -200px;
+  display: grid;
+  gap: 20px;
+  border-radius: 10px;
+  padding: 20px;
+  border: solid 3px white;
+  transition: all 500ms ease-in-out;
+
+  button {
+    color: white;
+    border: 3px white double;
+    width: max-content;
+    padding: 5px 20px;
+    margin: auto;
+  }
+}
+
 main {
   margin: auto;
   display: flex;
