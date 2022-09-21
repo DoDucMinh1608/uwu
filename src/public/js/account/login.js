@@ -6,3 +6,5 @@ registerBtn.click(e => {
   e.preventDefault()
   window.location.replace('./register')
 })
+
+
