@@ -7,14 +7,23 @@ REGISTER
 
 <% const account = JSON.parse(locals.account || '{}') %>
 <% const data = JSON.parse(locals.data || '{}') %>
-
+<% const register = locals.register %>
 <%- contentFor('body') %>
+<% if (register) { %>
+<%- include('../../partials/popup-content',{
+    content:"Register Successful!!!", 
+    url:'./login',
+    button: "Back to Login."
+}) %>
+<% } %>
+<a href="./login">
+  &lt;- Back To Login</a>
 <main>
   <h1>REGISTER</h1>
   <form action="./register" method="post" class="login-field">
-    <%- include('../../partials/registerFile', {account, data}) %>
-    <% if (locals.error) { %>
-    <span class="error-message">Try again</span>
+    <%- include('../../partials/registerFile', {account, data:register?{}:data}) %>
+    <% if (locals.err) { %>
+    <span class="error-message">Register Fail!!!</span>
     <% } %>
     <section class="input-field">
       <input type="submit" value="Register">

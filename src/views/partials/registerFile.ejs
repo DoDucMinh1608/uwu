@@ -2,12 +2,12 @@
 <section class="input-field grid-2">
   <div class="input-section">
     <label for="birthday-input">Birthday</label>
-    <input type="date" name="birthday" id="birthday-input" required>
+    <input value="<%-data.birthday%>" type="date" name="birthday" id="birthday-input" required>
   </div>
   <div class="input-section">
     <label for="gender">Gender</label>
     <select name="gender" id="gender" required>
-      <%["male","female","others"].forEach(value=>{%>
+      <%account.gender.enum.forEach(value=>{%>
       <option value="<%- value %>" <%-value == data?.gender ? 'selected':''%>><%-value%></option>
       <%})%>
     </select>

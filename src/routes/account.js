@@ -7,11 +7,13 @@ const accountSche = Account.schema.obj
 router.route('/').get((req, res) => {
   res.render('pages/account/index')
 })
+
 router.route('/register').get((req, res) => {
   res.render('pages/account/register', {
     account: JSON.stringify(accountSche)
   })
 }).post(async (req, res) => {
+  let register = true, err = false;
   try {
     const data = req.body
     const newAccount = new Account({
@@ -22,19 +24,20 @@ router.route('/register').get((req, res) => {
     })
     await newAccount.save()
   } catch (error) {
-    console.log(error)
-    return res.render('pages/account/register', {
-      account: JSON.stringify(accountSche),
-      error: "Try again",
-      data: JSON.stringify(req.body)
-    })
+    register = false
+    err = true
   }
-  res.render('pages/account/login', { account: JSON.stringify(Account.schema.obj) })
+  res.render('pages/account/register', { account: JSON.stringify(Account.schema.obj), register, err, data: JSON.stringify(req.body) })
 })
+
 router.route('/login').get((req, res) => {
   res.render('pages/account/login', { account: JSON.stringify(Account.schema.obj), register: req.query.register })
-}).post((req, res) => {
-  res.send(req.body)
+}).post(async (req, res) => {
+  const { username, password } = req.body
+  const account = await Account.findOne({
+    name: username, password
+  })
+  res.send(account)
 })
 
 module.exports = router

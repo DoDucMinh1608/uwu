@@ -1,6 +1,23 @@
 <section class="pop-up-account">
-  <p class="message">
-    Successful Register!!!
-  </p>
-  <button>Close</button>
+  <p class="message"> <%- content || '' %> </p>
+  <button><%- button %></button>
 </section>
+<script type="module">
+  const Popup = $('.pop-up-account')
+  const url = '<%- url || "" %>'
+  $(window).load(function () {
+    if (Popup.length > 0) Popup.css({ top: '100px' })
+  })
+  function hidePopup(e) {
+    const target = e.target
+    if (target.nodeName != 'BUTTON') return
+    Popup.css({ top: '-200px' })
+    if (url) window.location.replace(url)
+  }
+
+  Popup.click(hidePopup)
+  $(document.body).click(e => {
+    if (!$(e.target.closest('.pop-up-account'))) return
+    Popup.css({ top: '-200px' })
+  })
+</script>

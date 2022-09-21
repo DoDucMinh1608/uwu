@@ -6,12 +6,7 @@ LOGIN
 <script src=".././../js/account/login.js" type="module" defer></script>
 
 <% const data = JSON.parse(locals.data || "{}")%>
-<% const register = locals.register %>
 <%- contentFor('body') %>
-<% if (register) { %>
-<%- include('../../partials/popup-content', {content:""}) %>
-<% } %>
-
 <main>
   <h1>LOGIN</h1>
   <form action="./login" method="post" class="login-field">
@@ -22,6 +17,3 @@ LOGIN
     </section>
   </form>
 </main>
-<script>
-
-</script>
