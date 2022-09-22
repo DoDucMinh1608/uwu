@@ -11,6 +11,9 @@ LOGIN
   <h1>LOGIN</h1>
   <form action="./login" method="post" class="login-field">
     <%- include('../../partials/inputField',{data}) %>
+    <% if (locals.err) { %>
+    <p class="error">Try again!!!</p>
+    <% } %>
     <section class="input-field">
       <input type="submit" value="Login">
       <button class="register-btn">Register</button>
