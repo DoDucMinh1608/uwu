@@ -136,5 +136,5 @@ const a = new FolderTemplate()
 
 a.addRoute(_)
 a.addRoute('account', ['register', 'login'],)
-a.addRoute('users', undefined, { subDir: true })
+a.addRoute('users', [], { subDir: true })
 a.createProject()

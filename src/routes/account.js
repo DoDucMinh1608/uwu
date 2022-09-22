@@ -4,7 +4,7 @@ const Account = require('../database/account')
 const router = Router()
 const accountSche = Account.schema.obj
 
-router.use('/', require('./users'))
+router.use('/info', require('./users'))
 
 router.route('/register').get((req, res) => {
   res.render('pages/account/register', { account: JSON.stringify(accountSche) })
