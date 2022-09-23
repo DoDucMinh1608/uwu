@@ -7,10 +7,12 @@ ACCOUNT
 
 <% const account = JSON.parse(locals.account || '{}') %>
 <%- contentFor('body') %>
+<h1>account</h1>
+
 <% if (locals.account) { %>
 <script>
   const account = JSON.parse(`<%- locals.account %>`)
   localStorage.setItem('account', JSON.stringify(account))
-  window.location.replace(`./${account.id}`)
+  window.location.replace(`./info/${account.id}`)
 </script>
 <% } %>

@@ -6,6 +6,10 @@ const accountSche = Account.schema.obj
 
 router.use('/info', require('./users'))
 
+router.route('/').get((req, res) => {
+  res.render('pages/account/index')
+})
+
 router.route('/register').get((req, res) => {
   res.render('pages/account/register', { account: JSON.stringify(accountSche) })
 }).post(async (req, res) => {

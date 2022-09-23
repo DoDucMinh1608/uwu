@@ -1,1 +1,12 @@
 @use '../index/style.scss';
+
+.aside-item {
+  // border: 1px white solid;
+  padding: 5px 10px;
+  margin: 5px;
+  border-radius: 5px;
+}
+
+main {
+  background: linear-gradient(to bottom right, rgba(72, 128, 171, 0.371) 20%, rgba(10, 54, 98, 0.36));
+}

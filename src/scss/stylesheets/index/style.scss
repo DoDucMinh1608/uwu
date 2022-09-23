@@ -19,13 +19,68 @@ body {
       // background-color: grey;
     }
   }
+}
 
-  >* {
-    border: white 1px solid;
-  }
+aside {
+  padding: 20px auto;
+  background-color: rgb(42, 42, 42);
+  display: grid;
+  gap: 10px;
 }
 
 a {
   color: white;
   text-decoration: none;
+}
+
+main {
+  display: flex;
+  padding: 30px 60px;
+  overflow: hidden;
+
+  .main {
+    display: grid;
+    grid-template-rows: 2.5rem 1fr;
+    height: 80%;
+    background-color: rgba(255, 255, 255, 0.075);
+    width: 100%;
+    border-radius: 10px;
+    padding: 10px 40px;
+    overflow: hidden;
+
+    .header {
+      border-bottom: 2px white solid;
+      padding: 0px 15px;
+
+      h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+    }
+
+    .content {
+      padding: 20px;
+      margin-top: 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
+
+      >* {
+        display: flex;
+        justify-content: space-between;
+
+        .title {
+          text-transform: capitalize;
+        }
+
+        .title,
+        .lable {
+          font-size: 1.5rem;
+        }
+      }
+    }
+
+  }
 }

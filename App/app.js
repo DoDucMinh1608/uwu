@@ -35,11 +35,11 @@ class RouteTemplate extends File {
   ejsTemplate = readFileSync(join(__dirname, 'static_file', 'layout.ejs'))
   expressApp = readFileSync(join(__dirname, 'static_file', 'expressApp.js'))
   resetScss = readFileSync(join(__dirname, 'static_file', 'reset.scss'))
-  addNamespace(namespace) {
+  _addNamespace(namespace) {
     return name => name || namespace
   }
-  jsNamespace = this.addNamespace('index')
-  cssNamespace = this.addNamespace('style')
+  jsNamespace = this._addNamespace('index')
+  cssNamespace = this._addNamespace('style')
   _writeEjs(path, route = '') {
     return `<%- contentFor('title') %>
 ${(route || path).toUpperCase()}
@@ -135,6 +135,7 @@ class FolderTemplate extends RouteTemplate {
 const a = new FolderTemplate()
 
 a.addRoute(_)
-a.addRoute('account', ['register', 'login'],)
-a.addRoute('users', [], { subDir: true })
+a.addRoute('account')
+a.addRoute('account2', ['login', 'register'])
+
 a.createProject()
