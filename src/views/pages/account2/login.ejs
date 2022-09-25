@@ -5,5 +5,26 @@ LOGIN
 <link rel="stylesheet" href=".././../css/stylesheets/account2/login.css">
 <script src=".././../js/account2/login.js" type="module" defer></script>
 
+<% const data = JSON.parse(locals.data || "{}")%>
 <%- contentFor('body') %>
-<h1>account2/login</h1>
+<% if (locals.success) { %>
+<%- include('../../partials/popup-content', { content: "Login!!!", url: './', button: '' }) %>
+<% } %>
+<script>
+  const data = '<%- locals.data %>'
+  localStorage.setItem('account', data);
+  location.replace('./')
+</script>
+<main>
+  <h1>LOGIN</h1>
+  <form action="./login" method="post" class="login-field">
+    <%- include('../../partials/inputField',{data}) %>
+    <% if (locals.err) { %>
+    <p class="error">Try again!!!</p>
+    <% } %>
+    <section class="input-field">
+      <input type="submit" value="Login">
+      <button class="register-btn">Register</button>
+    </section>
+  </form>
+</main>

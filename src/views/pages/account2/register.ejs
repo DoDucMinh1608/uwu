@@ -5,5 +5,28 @@ REGISTER
 <link rel="stylesheet" href=".././../css/stylesheets/account2/register.css">
 <script src=".././../js/account2/register.js" type="module" defer></script>
 
+<% const account = JSON.parse(locals.account || '{}') %>
+<% const data = JSON.parse(locals.data || '{}') %>
+<% const register = locals.register %>
 <%- contentFor('body') %>
-<h1>account2/register</h1>
+<% if (register) { %>
+<%- include('../../partials/popup-content', {
+    content:"Register Successful!!!", 
+    url:'./login',
+    button: "Back to Login."
+}) %>
+<% } %>
+<a href="./login">
+  &lt;- Back To Login</a>
+<main>
+  <h1>REGISTER</h1>
+  <form action="./register" method="post" class="login-field">
+    <%- include('../../partials/registerFile', {account, data:register?{}:data}) %>
+    <% if (locals.err) { %>
+    <span class="error-message">Register Fail!!!</span>
+    <% } %>
+    <section class="input-field">
+      <input type="submit" value="Register">
+    </section>
+  </form>
+</main>

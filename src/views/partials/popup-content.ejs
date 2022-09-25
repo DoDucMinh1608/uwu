@@ -1,6 +1,8 @@
 <section class="pop-up-account">
   <p class="message"> <%- content || '' %> </p>
+  <% if (button) { %>
   <button><%- button %></button>
+  <% } %>
 </section>
 <script type="module">
   const Popup = $('.pop-up-account')

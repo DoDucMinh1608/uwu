@@ -5,5 +5,14 @@ ACCOUNT2
 <link rel="stylesheet" href=".././../css/stylesheets/account2/style.css">
 <script src=".././../js/account2/index.js" type="module" defer></script>
 
+<% const account = JSON.parse(locals.account || '{}') %>
 <%- contentFor('body') %>
-<h1>account2/</h1>
+<h1>account</h1>
+
+<% if (locals.account) { %>
+<script>
+  const account = JSON.parse(`<%- locals.account %>`)
+  localStorage.setItem('account', JSON.stringify(account))
+  window.location.replace(`./info/${account.id}`)
+</script>
+<% } %>
