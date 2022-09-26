@@ -6,6 +6,8 @@ router.route('/').get((req, res) => {
   res.render('pages/account2/index')
 })
 
+router.use('/user', require('./users'))
+
 router.route('/login').get((req, res) => {
   res.render('pages/account2/login', { account: JSON.stringify(Account.schema.obj), register: req.query.register })
 }).post(async (req, res) => {
@@ -14,7 +16,7 @@ router.route('/login').get((req, res) => {
 
   if (!account) return res.render('pages/account/login', { err: true })
   res.render('pages/account2/login', {
-    data: JSON.stringify({ username, password }),
+    data: JSON.stringify({ username, password, id: account.id }),
     success: true,
   })
 })

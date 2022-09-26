@@ -1,20 +1,15 @@
-const account = localStorage.getItem("account")
-if (!account) window.location.replace('/account/login')
+const account = JSON.parse(localStorage.getItem('account'))
+if (!account) location.replace('/account2/login')
+if (account.id && !document.URL.includes(account.id)) location.replace(`./${account.id}`)
 
-const id = JSON.parse(account).id
-if (!document.URL.includes(id)) window.location.replace(`./info/${id}`)
-
-function updateInfo(data) {
-  console.log(JSON.parse(data));
-}
-
-let result;
 const xhttp = new XMLHttpRequest()
 xhttp.open("POST", "./validate", true);
 xhttp.setRequestHeader('Content-type', 'application/json;charset=UTF-8')
 xhttp.onload = function () {
-  if (this.status != 200) return
-  updateInfo(this.responseText)
+  const data = JSON.parse(this.responseText)?.verify
+  if (data) return
+  localStorage.removeItem('account')
+  location.replace('/account2/login')
 };
 
-xhttp.send(account);
+xhttp.send(JSON.stringify(account)); 
