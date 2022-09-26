@@ -8,13 +8,13 @@ LOGIN
 <% const data = JSON.parse(locals.data || "{}")%>
 <%- contentFor('body') %>
 <% if (locals.success) { %>
-<%- include('../../partials/popup-content', { content: "Login!!!", url: './', button: '' }) %>
-<% } %>
-<script>
+<%- include('../../partials/popup-content', { content: "Login!!!", url: '../account2' }) %>
+<script type="module">
   const data = '<%- locals.data %>'
   localStorage.setItem('account', data);
-  location.replace('./')
+
 </script>
+<% } %>
 <main>
   <h1>LOGIN</h1>
   <form action="./login" method="post" class="login-field">

@@ -8,6 +8,7 @@ REGISTER
 <% const account = JSON.parse(locals.account || '{}') %>
 <% const data = JSON.parse(locals.data || '{}') %>
 <% const register = locals.register %>
+
 <%- contentFor('body') %>
 <% if (register) { %>
 <%- include('../../partials/popup-content', {

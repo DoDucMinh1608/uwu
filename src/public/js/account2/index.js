@@ -1,2 +1,2 @@
 
-if (!localStorage.getItem('account')) location.replace('./account2/login')
+if (localStorage.getItem('account') == null) location.replace('./account2/login')

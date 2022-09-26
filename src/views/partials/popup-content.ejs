@@ -1,8 +1,5 @@
 <section class="pop-up-account">
   <p class="message"> <%- content || '' %> </p>
-  <% if (button) { %>
-  <button><%- button %></button>
-  <% } %>
 </section>
 <script type="module">
   const Popup = $('.pop-up-account')
@@ -11,15 +8,8 @@
     if (Popup.length > 0) Popup.css({ top: '100px' })
   })
   function hidePopup(e) {
-    const target = e.target
-    if (target.nodeName != 'BUTTON') return
     Popup.css({ top: '-200px' })
-    if (url) window.location.replace(url)
+    if (url) setTimeout(() => window.location.replace(url), 500)
   }
-
-  Popup.click(hidePopup)
-  $(document.body).click(e => {
-    if (!$(e.target.closest('.pop-up-account'))) return
-    Popup.css({ top: '-200px' })
-  })
+  $(document.body).click(hidePopup)
 </script>
