@@ -7,7 +7,7 @@
   <div class="input-section">
     <label for="gender">Gender</label>
     <select name="gender" id="gender" required>
-      <%account.gender.enum.forEach(value=>{%>
+      <%account.gender.?enum.forEach(value=>{%>
       <option value="<%- value %>" <%-value == data?.gender ? 'selected':''%>><%-value%></option>
       <%})%>
     </select>

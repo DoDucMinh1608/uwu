@@ -17,17 +17,8 @@ REGISTER
     button: "Back to Login."
 }) %>
 <% } %>
-<a href="./login">
-  &lt;- Back To Login</a>
+<a href="./login"> &lt;- Back To Login</a>
 <main>
   <h1>REGISTER</h1>
-  <form action="./register" method="post" class="login-field">
-    <%- include('../../partials/registerFile', {account, data:register?{}:data}) %>
-    <% if (locals.err) { %>
-    <span class="error-message">Register Fail!!!</span>
-    <% } %>
-    <section class="input-field">
-      <input type="submit" value="Register">
-    </section>
-  </form>
+  <%- include('../../partials/register-form', { account, register, data }) %>
 </main>

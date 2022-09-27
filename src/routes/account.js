@@ -7,7 +7,7 @@ const accountSche = Account.schema.obj
 router.use('/info', require('./users'))
 
 router.route('/').get((req, res) => {
-  res.render('pages/account/index')
+  res.redirect('/account2')
 })
 
 router.route('/register').get((req, res) => {

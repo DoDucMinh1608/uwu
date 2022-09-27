@@ -13,7 +13,6 @@ router.route('/login').get((req, res) => {
 }).post(async (req, res) => {
   const { username, password } = req.body
   const account = await Account.findOne({ name: username, password })
-
   if (!account) return res.render('pages/account/login', { err: true })
   res.render('pages/account2/login', {
     data: JSON.stringify({ username, password, id: account.id }),

@@ -12,4 +12,8 @@ xhttp.onload = function () {
   location.replace('/account2/login')
 };
 
-xhttp.send(JSON.stringify(account)); 
+xhttp.send(JSON.stringify(account));
+
+$('.Change').click(e => {
+  location.replace('./change')
+})

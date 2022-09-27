@@ -1,0 +1,14 @@
+<%- contentFor('title') %>
+CHANGE
+
+<%- contentFor('init') %>
+<link rel="stylesheet" href=".././../css/stylesheets/users/change.css">
+<script src=".././../js/users/change.js" type="module" defer></script>
+
+<%- contentFor('body') %>
+<%- include('../../partials/navbar') %>
+<%- include('../../partials/acc-sidebar', {sections: ['Info','Change']}) %>
+<main>
+  <h1>Change</h1>
+  <%- include('../../partials/register-form',{ account: {}, register: {}, data: {} }) %>
+</main>

@@ -7,7 +7,7 @@ app.use(express.static(path.join('src', 'public')))
 app.set("views", path.join(__dirname, 'src', 'views'))
 
 app.use('/', require('./src/routes/index'))
-app.use('/account', require('./src/routes/account'))
 app.use('/account2', require('./src/routes/account2'))
+
 
 listen()

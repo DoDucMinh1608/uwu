@@ -135,7 +135,7 @@ class FolderTemplate extends RouteTemplate {
 const a = new FolderTemplate()
 
 a.addRoute(_)
-a.addRoute('account')
+// a.addRoute('account')
 a.addRoute('account2', ['login', 'register'])
-
+a.addRoute('users', ['change'], { subDir: true })
 a.createProject()
