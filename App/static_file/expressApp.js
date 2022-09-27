@@ -19,6 +19,6 @@ const io = new Server(httpServer)
 
 function listen(port = 3000) {
   mongoose.connect('mongodb://127.0.0.1:27017/____', { useNewUrlParser: true, useUnifiedTopology: true }).then(() => console.log('Connected to the db...'))
-  httpServer.listen(port, () => console.log(`Listen on port ${port}`))
+  httpServer.listen(port, () => console.log(`Listen on port ${process.env.PORT || port}`))
 }
 module.exports = { app, io, listen }
