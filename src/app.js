@@ -5,6 +5,7 @@ const expressEjsLayouts = require('express-ejs-layouts')
 const { Server } = require('socket.io')
 const { createServer } = require('http')
 
+try { require('dotenv').config() } catch (error) { }
 const app = express()
 
 app.use(express.urlencoded({ extended: true }))
@@ -17,8 +18,9 @@ app.set('layout', path.join('layouts', 'layout'))
 const httpServer = createServer(app)
 const io = new Server(httpServer)
 
-function listen(port = 3000) {
-  mongoose.connect('mongodb://127.0.0.1:27017/____', { useNewUrlParser: true, useUnifiedTopology: true }).then(() => console.log('Connected to the db...'))
-  httpServer.listen(port, () => console.log(`Listen on port ${process.env.PORT || port}`))
+function listen() {
+  mongoose.connect(process.env[app.get('env') == 'development' ? 'TESTDB' : 'DB'], { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log('Connected to the db...'))
+  httpServer.listen(process.env.PORT, () => console.log(`Listen on port ${process.env.PORT}`))
 }
 module.exports = { app, io, listen }
