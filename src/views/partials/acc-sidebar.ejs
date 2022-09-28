@@ -1,9 +1,12 @@
 <aside>
-  <section class="main-section">
+  <section class="sidebar-section">
     <% sections.forEach(item => { %>
     <section class="aside-item <%- item %>">
       <span><%- item %></span>
     </section>
     <% }) %>
+  </section>
+  <section class="sidebar-section log-out">
+    <button>Log out</button>
   </section>
 </aside>

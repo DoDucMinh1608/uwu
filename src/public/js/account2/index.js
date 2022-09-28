@@ -1,5 +1,5 @@
-if (localStorage.getItem('account') == null) location.replace('./account2/login')
+import { checkAccount } from '../users/redirect.mjs'
 
-const account = JSON.parse(localStorage.getItem('account'))
+checkAccount()
 
-location.replace(`/account2/user/${account.id}`)
+location.replace(`/account2/user/${JSON.parse(localStorage.getItem('account')).id}`)

@@ -31,7 +31,19 @@ aside {
   padding: 20px auto;
   background-color: rgb(42, 42, 42);
   display: grid;
+  grid-template-rows: 1fr 50px;
   gap: 10px;
+
+  >* {
+    border-top: solid white 2px;
+    display: flex;
+    flex-direction: column;
+
+    button {
+      color: red;
+      margin: auto;
+    }
+  }
 }
 
 a {

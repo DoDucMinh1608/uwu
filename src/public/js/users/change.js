@@ -1,4 +1,9 @@
 import { sendDataSync } from '../utilities.mjs'
+import { logout } from '../utilities.mjs'
+import { checkAccount } from './redirect.mjs'
+
+checkAccount()
+logout()
 
 $('.Info').click(e => location.replace('./'))
 $('.input-field:last-child').before($('#password').closest('.input-field')[0])
@@ -18,3 +23,4 @@ const genderInput = $('#gender')
 ].forEach(i => i[0].val() || i[0].val(account[i[1]]))
 
 passInput.val('')
+

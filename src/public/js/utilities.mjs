@@ -17,3 +17,10 @@ export function sendDataSync(method = { method: "POST", url: './', async: true }
   xhttp.send(data)
   return result
 }
+
+export function logout() {
+  $('.log-out').click(e => {
+    localStorage.removeItem('account')
+    location.replace('/account2/login')
+  })
+}
