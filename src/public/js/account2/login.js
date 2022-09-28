@@ -5,3 +5,4 @@ registerBtn.click(e => {
   window.location.replace('./register')
 })
 
+if (localStorage.getItem('account')) location.replace('/account2')

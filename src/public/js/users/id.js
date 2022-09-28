@@ -1,4 +1,4 @@
-import { sendDataSync, sendData } from '../utilities.js'
+import { sendDataSync, sendData } from '../utilities.mjs'
 
 const account = JSON.parse(localStorage.getItem('account'))
 if (!account) location.replace('/account2/login')

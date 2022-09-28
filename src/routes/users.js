@@ -13,6 +13,11 @@ router.route('/validate').post(async (req, res) => {
 
 router.route('/change').get((req, res) => {
   res.render('pages/users/change', { account: Account.schema.obj })
+}).post(async (req, res) => {
+  const data = req.body
+  const account = await Account.findOne({ name: data.username, password: data.password })
+  if (!account) return res.render('pages/users/change', { account: Account.schema.obj, data, err: true })
+  res.send('hello')
 })
 
 router.route('/data').post(async (req, res) => {

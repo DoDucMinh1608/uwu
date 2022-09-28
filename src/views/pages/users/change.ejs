@@ -6,7 +6,7 @@ CHANGE
 <script src=".././../js/users/change.js" type="module" defer></script>
 
 <% const account = locals.account %>
-
+<% const data = locals.data || {} %>
 <%- contentFor('body') %>
 <%- include('../../partials/navbar') %>
 <%- include('../../partials/acc-sidebar', {sections: ['Info','Change']}) %>
@@ -18,7 +18,7 @@ CHANGE
     <div class="content">
       <form action="./change" method="post" class="update-field">
         <%- include('../../partials/register-form',{ 
-          account, data: {}, button: 'Update'
+          account, data, button: 'Update', errMsg: 'Update fail!!!'
         }) %>
       </form>
     </div>

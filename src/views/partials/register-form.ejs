@@ -1,4 +1,5 @@
 <%- include('./inputField', { account, data }) %>
+<!-- <h1><%- JSON.stringify(data) %></h1> -->
 <section class="input-field grid-2">
   <div class="input-section">
     <label for="birthday-input">Birthday</label>
@@ -8,14 +9,16 @@
     <label for="gender">Gender</label>
     <select name="gender" id="gender" required>
       <% account.gender?.enum.forEach(value=>{ %>
-      <option value="<%- value %>" <%-value == data?.gender ? 'selected':''%>><%- value %></option>
+      <option value="<%- value %>" <%- value == data.gender ? 'selected':''%>><%- value %></option>
       <% }) %>
     </select>
   </div>
 </section>
+
 <% if (locals.err) { %>
-<span class="error-message">Register Fail!!!</span>
+<span class="error-message"><%- errMsg %></span>
 <% } %>
+
 <section class="input-field">
   <input type="submit" value=<%- button %>>
 </section>

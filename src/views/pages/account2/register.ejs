@@ -21,6 +21,9 @@ REGISTER
 <main>
   <h1>REGISTER</h1>
   <form action="./register" method="post" class="login-field">
-    <%- include('../../partials/register-form', { account, register, data }) %>
+    <%- include('../../partials/register-form', { 
+      account, register, data, 
+      errMsg:'Register fail!!!', button: 'Submit' 
+    }) %>
   </form>
 </main>

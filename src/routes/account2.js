@@ -30,5 +30,7 @@ router.route('/register').get((req, res) => {
   catch { register = false, err = true }
   res.render('pages/account2/register', { account: JSON.stringify(Account.schema.obj), register, err, data: JSON.stringify(req.body) })
 })
-
+router.route('/:id').get((req, res) => {
+  res.redirect(`/account2/user/${req.params.id}`)
+})
 module.exports = router
