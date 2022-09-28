@@ -6,28 +6,4 @@ USERS
 <script src=".././../js/users/index.js" type="module" defer></script>
 
 
-<% const account = locals.account %>
 <%- contentFor('body') %>
-<%- include('../../partials/navbar') %>
-<%- include('../../partials/acc-sidebar', {sections: ['Info','Change']}) %>
-<main>
-  <section class="main">
-    <div class="header">
-      <h1>Info</h1>
-    </div>
-    <div class="content">
-      <div class="content-item">
-        <span class="title">Name</span>
-        <p class="lable"><%- account.name %></p>
-      </div>
-      <div class="content-item">
-        <span class="title">Birthday</span>
-        <p class="lable"><%- account.birth %></p>
-      </div>
-      <div class="content-item">
-        <span class="title">Gender</span>
-        <p class="lable"><%- account.gender %></p>
-      </div>
-    </div>
-  </section>
-</main>

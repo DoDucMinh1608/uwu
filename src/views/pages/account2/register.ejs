@@ -20,5 +20,7 @@ REGISTER
 <a href="./login"> &lt;- Back To Login</a>
 <main>
   <h1>REGISTER</h1>
-  <%- include('../../partials/register-form', { account, register, data }) %>
+  <form action="./register" method="post" class="login-field">
+    <%- include('../../partials/register-form', { account, register, data }) %>
+  </form>
 </main>

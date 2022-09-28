@@ -1,1 +1,110 @@
 @use './style.scss';
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 100px;
+
+  h1 {
+    font-size: 2rem;
+  }
+}
+
+.main-container {
+  background-color: rgba(255, 255, 255, 0.075);
+  display: grid;
+  grid-template-columns: 30% 1fr;
+  gap: 10px;
+  padding: 20px;
+  border-radius: 20px;
+
+  .header {
+    text-transform: uppercase;
+  }
+}
+
+form {
+  display: grid;
+  gap: 15px;
+}
+
+.input-field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+label {
+  width: 200px;
+}
+
+input[type=text],
+input[type=password] {
+  background: none;
+  padding: 5px 10px;
+  padding-right: 30px;
+  border: white 2px solid;
+  color: white;
+  border-radius: 10px;
+}
+
+input[type=date] {
+  background: none;
+  border: none;
+  gap: 10px;
+  padding: 3px 0px;
+  color: white;
+  border: white 1px solid;
+  border-radius: 5px;
+}
+
+::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  margin-right: 10px;
+}
+
+::-webkit-datetime-edit-text {
+  color: rgba(255, 255, 255, 0.252);
+  text-transform: uppercase;
+  padding: 0 0.3em;
+}
+
+::-webkit-datetime-edit {
+  padding: 5px 0;
+  padding-left: 10px;
+  margin-right: 20px;
+}
+
+input::placeholder {
+  color: rgba(255, 255, 255, 0.374);
+}
+
+input[type="submit"] {
+  color: white;
+  border: white 1px solid;
+  padding: 10px;
+  border-radius: 5px;
+  width: 50%;
+  margin: auto;
+  text-transform: uppercase;
+}
+
+select {
+  width: max-content;
+  background: rgba(255, 255, 255, 0.356);
+  color: none;
+  border: none;
+}
+
+.input-section {
+  display: grid;
+  gap: 10px;
+  align-items: center;
+}
+
+select {
+  width: 100%;
+  padding: 5px;
+  border-radius: 10px;
+}
