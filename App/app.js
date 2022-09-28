@@ -77,7 +77,7 @@ const { app, listen } = require('./${this.projectDir}/app')\n\n` +
 
 app.set("views", path.join(__dirname, '${this.projectDir}', '${this.views}'))\n\n` +
       routes.reduce((main, route) => main + this._createPathSection(route), '') +
-      `\n\nlisten()`)
+      `\nlisten()`)
   }
 }
 class FolderTemplate extends RouteTemplate {
