@@ -15,11 +15,20 @@ router.route('/change').get((req, res) => {
   res.render('pages/users/change', { account: Account.schema.obj })
 })
 
+router.route('/data').post(async (req, res) => {
+  try {
+    const { name, birthday, gender } = await Account.findById(req.body.id)
+    const birth = birthday.toISOString().split('T')[0]
+    return res.send(JSON.stringify({ name, birth, gender }))
+  }
+  catch { res.send(JSON.stringify({ err: true })) }
+})
+
 router.route('/:id').get(async (req, res) => {
-  let account
-  try { account = await Account.findById(req.params.id) }
-  catch (error) { return res.send(error) }
-  res.render('pages/users/id', { account: { name: account.name, birth: account.birthday.toLocaleDateString(), gender: account.gender } })
+  try {
+    const account = await Account.findById(req.params.id)
+    res.render('pages/users/id', { account: { name: account.name, birth: account.birthday.toLocaleDateString(), gender: account.gender } })
+  } catch (error) { res.send(error) }
 })
 
 module.exports = router
